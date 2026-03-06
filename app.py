@@ -1126,24 +1126,32 @@ lottie_heart = load_lottiefile("./assets/Heart with ECG.json")
 # =====================================================================
 # HEADER CON ANIMACIÓN LOTTIE
 # =====================================================================
-col_anim, col_text = st.columns([1, 5])
+# Crear contenedor centrado
+st.markdown("""
+<div style="text-align: center; padding: 2rem 0; margin-bottom: 2rem;">
+</div>
+""", unsafe_allow_html=True)
+
+# Columnas para centrar el contenido
+col_anim, col_text = st.columns([2, 3])
 
 with col_anim:
     if lottie_heart:
-        st_lottie(lottie_heart, height=300, key="header_heart", quality="high", speed=1)
+        st_lottie(lottie_heart, height=350, key="header_heart", quality="high", speed=1)
     else:
-        st.markdown("<div style='font-size: 4rem; text-align: center;'>❤️</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size: 12rem; text-align: center; line-height: 1;'>❤️</div>", unsafe_allow_html=True)
 
 with col_text:
     st.markdown("""
-    <div class="header-text">
-        <h1>CardioPredict Pro</h1>
-        <p>Sistema Inteligente de Evaluación de Riesgo Cardiovascular</p>
+    <div style="display: flex; flex-direction: column; justify-content: center; height: 250px;">
+        <h1 style="color: #DC143C; font-size: 4rem; font-weight: 700; margin: 0; line-height: 1.2;">
+            CardioPredict Pro
+        </h1>
+        <p style="color: #666666; font-size: 1.2rem; margin-top: 1rem; margin-bottom: 0; line-height: 1.4;">
+            Sistema Inteligente de Evaluación de Riesgo Cardiovascular
+        </p>
     </div>
     """, unsafe_allow_html=True)
-
-# Agregar espacio después del header
-st.markdown("<br>", unsafe_allow_html=True)
 
 # =====================================================================
 # VERIFICAR MODELO
@@ -1352,7 +1360,7 @@ with tab1:
             </div>
             """, unsafe_allow_html=True)
     else:
-        st.info("👈 Complete los datos del paciente en el panel lateral y presione **'ANALIZAR RIESGO CARDÍACO'** para ver los resultados.")
+        st.info("Complete los datos del paciente en el panel lateral y presione **'ANALIZAR RIESGO CARDÍACO'** para ver los resultados.")
         
         col1, col2, col3 = st.columns(3)
         
@@ -1388,32 +1396,61 @@ with tab2:
             fig_radar = crear_radar_chart(datos_paciente)
             st.plotly_chart(fig_radar, use_container_width=True)
         
-        st.subheader("📋 Resumen de Parámetros")
+        st.subheader("Resumen de Parámetros")
         
-        df_resumen = pd.DataFrame({
-            'Parámetro': [
-                'Edad', 'Sexo', 'Frecuencia Cardíaca Máxima',
-                'Glucosa en Ayunas', 'Angina por Ejercicio',
-                'Tipo de Dolor Torácico', 'Pendiente del Segmento ST'
-            ],
-            'Valor': [
-                f"{age} años", sex, f"{max_hr} bpm",
-                "Sí (>120 mg/dl)" if fasting_bs == 1 else "No (<120 mg/dl)",
-                exercise_angina,
-                {"ASY": "Asintomático", "ATA": "Angina Atípica", "NAP": "Dolor No Anginoso", "TA": "Angina Típica"}[chest_pain_type],
-                {"Flat": "Plana", "Up": "Ascendente", "Down": "Descendente"}[st_slope]
-            ],
-            'Estado': [
-                '⚠️ Riesgo' if age > 60 else '✓ Normal', '-',
-                '⚠️ Baja' if max_hr < (220 - age) * 0.6 else '✓ Adecuada',
-                '⚠️ Elevada' if fasting_bs == 1 else '✓ Normal',
-                '⚠️ Presente' if exercise_angina == "Sí" else '✓ Ausente',
-                '⚠️ Alto Riesgo' if chest_pain_type == "ASY" else '⚠️ Moderado' if chest_pain_type in ["TA", "ATA"] else '✓ Bajo',
-                '⚠️ Anormal' if st_slope in ["Flat", "Down"] else '✓ Normal'
-            ]
-        })
-        
-        st.dataframe(df_resumen.reset_index(drop=True), use_container_width=True)
+        tipo_dolor_texto = {'ASY': 'Asintomático', 'ATA': 'Angina Atípica', 'NAP': 'Dolor No Anginoso', 'TA': 'Angina Típica'}[chest_pain_type]
+        pendiente_texto = {'Flat': 'Plana', 'Up': 'Ascendente', 'Down': 'Descendente'}[st_slope]
+       # Crear tabla HTML personalizada en lugar de st.dataframe
+        tabla_html = f"""
+        <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
+           <thead>
+              <tr style="background: #F5F5F5;">
+                   <th style="padding: 1rem; text-align: left; border-bottom: 2px solid #E0E0E0;">Parámetro</th>
+                   <th style="padding: 1rem; text-align: left; border-bottom: 2px solid #E0E0E0;">Valor</th>
+                   <th style="padding: 1rem; text-align: left; border-bottom: 2px solid #E0E0E0;">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+               <tr>
+                   <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">Edad</td>
+                   <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">{age} años</td>
+                   <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">{'⚠️ Riesgo' if age > 60 else '✓ Normal'}</td>
+               </tr>
+               <tr>
+                   <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">Sexo</td>
+                   <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">{sex}</td>
+                   <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">-</td>
+              </tr>
+              <tr>
+                   <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">Frecuencia Cardíaca Máxima</td>
+                   <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">{max_hr} bpm</td>
+                <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">{'⚠️ Baja' if max_hr < (220 - age) * 0.6 else '✓ Adecuada'}</td>
+              </tr>
+              <tr>
+                  <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">Glucosa en Ayunas</td>
+                  <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">{"Sí (>120 mg/dl)" if fasting_bs == 1 else "No (<120 mg/dl)"}</td>
+                  <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">{'⚠️ Elevada' if fasting_bs == 1 else '✓ Normal'}</td>
+              </tr>
+              <tr>
+                  <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">Angina por Ejercicio</td>
+                  <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">{exercise_angina}</td>
+                  <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">{'⚠️ Presente' if exercise_angina == "Sí" else '✓ Ausente'}</td>
+              </tr>
+              <tr>
+                  <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">Tipo de Dolor Torácico</td>
+                  <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">{tipo_dolor_texto}</td>
+                  <td style="padding: 1rem; border-bottom: 1px solid #F0F0F0;">{'⚠️ Alto Riesgo' if chest_pain_type == "ASY" else '⚠️ Moderado' if chest_pain_type in ["TA", "ATA"] else '✓ Bajo'}</td>
+              </tr>
+              <tr>
+                 <td style="padding: 1rem;">Pendiente del Segmento ST</td>
+                 <td style="padding: 1rem;">{pendiente_texto}</td>
+                 <td style="padding: 1rem;">{'⚠️ Anormal' if st_slope in ["Flat", "Down"] else '✓ Normal'}</td>
+              </tr>
+            </tbody>
+        </table>
+        """
+
+        st.markdown(tabla_html, unsafe_allow_html=True)
     else:
         st.info("Complete los datos del paciente para ver las visualizaciones.")
 
@@ -1421,11 +1458,9 @@ with tab3:
     st.subheader("📖 Información sobre Variables Clínicas")
     
     with st.expander("📅 **Edad (Age)**"):
-        st.write("**Variable escalada con StandardScaler**")
         st.write("Factor de riesgo independiente. Riesgo aumenta >55 años (hombres), >65 años (mujeres)")
     
     with st.expander("❤️ **Frecuencia Cardíaca Máxima (MaxHR)**"):
-        st.write("**Variable escalada con StandardScaler**")
         st.write("FC máxima teórica = 220 - edad. Una FC baja indica limitación cardiovascular")
     
     with st.expander("🍬 **Glucosa en Ayunas (FastingBS)**"):
@@ -1449,14 +1484,3 @@ with tab3:
     st.markdown("---")
     st.info("⚕️ **Nota Médica**: Este sistema es una herramienta de apoyo diagnóstico. Las decisiones clínicas finales deben ser tomadas por profesionales médicos cualificados.")
 
-# =====================================================================
-# FOOTER
-# =====================================================================
-st.markdown("---")
-st.markdown("""
-<div class="footer">
-    <p><strong>CardioPredict Pro</strong> | Sistema de Predicción de Enfermedad Cardíaca</p>
-    <p>Desarrollado con Regresión Logística • Machine Learning para Medicina • 2024</p>
-    <p>⚠️ <em>Uso exclusivo para profesionales de la salud. No sustituye el diagnóstico médico profesional.</em></p>
-</div>
-""", unsafe_allow_html=True)
