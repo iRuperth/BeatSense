@@ -31,7 +31,9 @@ def load_lottiefile(filepath: str):
 
 # FUNCIONES PARA GESTIÓN DE HISTORIAL
 
-HISTORIAL_FILE = "historial_pacientes.csv"
+HISTORIAL_FILE = "docs/historial_pacientes.csv"
+os.makedirs("docs", exist_ok=True)
+
 def cargar_historial():
     """Carga el historial de pacientes desde CSV"""
     if os.path.exists(HISTORIAL_FILE):
@@ -242,6 +244,39 @@ st.markdown("""
     [data-testid="column"]:has(iframe) {
         padding: 0 !important;
     }
+    
+    /* Hacer tabs más grandes */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 2rem;
+}
+
+.stTabs [data-baseweb="tab"] {
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+    padding: 1rem 2rem !important;
+}
+
+.stTabs [data-baseweb="tab-list"] button {
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+}
+
+.stTabs [data-baseweb="tab-list"] button p {
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+}
+/* Animación de latido para el corazón */
+@keyframes heartbeat {
+    0%, 100% { 
+        transform: scale(1); 
+    }
+    10%, 30% { 
+        transform: scale(1.1); 
+    }
+    20%, 40% { 
+        transform: scale(1); 
+    }
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -388,7 +423,7 @@ def crear_radar_chart(datos):
 
 modelo, scaler, modelo_cargado = cargar_modelo()
 lottie_heart = load_lottiefile("./assets/Heart with ECG.json")
-
+lottie_heart_p = load_lottiefile("./assets/Love is blind.json")
 
 # HEADER CON ANIMACIÓN LOTTIE
 
@@ -438,8 +473,29 @@ if not modelo_cargado:
 # SIDEBAR - ENTRADA DE DATOS
 
 with st.sidebar:
-    # st.image("https://cdn-icons-png.flaticon.com/512/2913/2913133.png", width=100)
+    # st.image("assets/Designer.png", width=150,)
+    # Header personalizado del sidebar
+    with st.sidebar:
+    # Header personalizado del sidebar - blanco con acento rojo
+     st.markdown("""
+      <div style="text-align: center; 
+                padding: 1.5rem; 
+                background: white; 
+                border-radius: 15px; 
+                margin-bottom: 1.5rem;
+                box-shadow: 0 4px 15px rgba(230, 57, 70, 0.2);
+                border: 2px solid #E63946;">
+        <div style="font-size: 3rem; margin-bottom: 0.5rem; animation: heartbeat 1s infinite;">❤️</div>
+        <h3 style="color: #1A1A1A; margin: 0; font-size: 1.3rem; font-weight: 700;">Datos del Paciente</h3>
+        <div style="width: 60px; height: 3px; background: #E63946; margin: 0.8rem auto 0 auto; border-radius: 2px;"></div>
+       </div>
+       """, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    
+    
     st.title("Datos del Paciente")
+    
     st.markdown("---")
     
     st.subheader("Información General")
@@ -593,7 +649,7 @@ with tab1:
             st.metric("Probabilidad Con Enfermedad", f"{probs[1]*100:.1f}%")
         
         st.markdown("<br>", unsafe_allow_html=True)
-        st.subheader("📋 Recomendaciones Médicas")
+        st.subheader("Recomendaciones Médicas")
         
         if clasificacion == "Alto Riesgo":
             st.markdown("""
@@ -622,28 +678,51 @@ with tab1:
             </div>
             """, unsafe_allow_html=True)
     else:
-        st.info("Complete los datos del paciente en el panel lateral y presione **'ANALIZAR RIESGO CARDÍACO'** para ver los resultados.")
+        st.markdown("""
+        <div style="background: white; 
+            padding: 2rem; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+            border-top: 5px solid #E63946;">
+    
+        <div style="text-align: center; margin-bottom: 2rem;">
+        <h2 style="color: #1A1A1A; font-size: 2rem; font-weight: 700; margin: 0; display: flex; align-items: center; justify-content: center; gap: 1rem;">
+            Comience su Evaluación Cardiovascular 
+            <span style="font-size: 2.5rem; animation: heartbeat 1s infinite; display: inline-block;">❤️</span>
+        </h2>
+        </div>
+    
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1.5rem;">
         
-        col1, col2, col3 = st.columns(3)
+        <div style="text-align: center; padding: 1.5rem; background: #F8F9FA; border-radius: 10px;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📋</div>
+            <h3 style="color: #E63946; font-size: 1.1rem; margin: 0.5rem 0;">Paso 1</h3>
+            <p style="color: #666; font-size: 0.95rem; margin: 0;">Complete el formulario lateral</p>
+        </div>
         
-        with col1:
-            st.markdown("""
-            ### 🏥 Para Centros Médicos
-            Sistema diseñado para integración en flujos de trabajo clínico, permitiendo evaluaciones rápidas y precisas.
-            """)
+        <div style="text-align: center; padding: 1.5rem; background: #F8F9FA; border-radius: 10px;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🔍</div>
+            <h3 style="color: #E63946; font-size: 1.1rem; margin: 0.5rem 0;">Paso 2</h3>
+            <p style="color: #666; font-size: 0.95rem; margin: 0;">Presione Analizar Riesgo</p>
+        </div>
         
-        with col2:
-            st.markdown("""
-            ### 👨‍⚕️ Para Cardiólogos
-            Herramienta de apoyo diagnóstico basada en Regresión Logística con umbral optimizado (40%).
-            """)
+        <div style="text-align: center; padding: 1.5rem; background: #F8F9FA; border-radius: 10px;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📊</div>
+            <h3 style="color: #E63946; font-size: 1.1rem; margin: 0.5rem 0;">Paso 3</h3>
+            <p style="color: #666; font-size: 0.95rem; margin: 0;">Visualice los resultados</p>
+        </div>
         
-        with col3:
-            st.markdown("""
-            ### 📊 Análisis Basado en Evidencia
-            Predicciones fundamentadas en 7 variables clínicas clave (12 features con encoding).
-            """)
-
+        </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # if lottie_heart_p:
+        #     st_lottie(lottie_heart_p, height=500, key="heart_principal", quality="high", speed=1)
+        # else:
+        #     st.markdown("<div style='font-size: 12rem; text-align: center; line-height: 1;'>❤️</div>", unsafe_allow_html=True)
+        
+        
 with tab2:
     if analizar:
         col1, col2 = st.columns(2)
