@@ -1,0 +1,3 @@
+Fecha,Hora,ID_Paciente,Edad,Sexo,FC_Maxima,Glucosa_Ayunas,Angina_Ejercicio,Tipo_Dolor,Pendiente_ST,Probabilidad_%,Clasificacion,Riesgo
+2026-03-06,17:18:18,PAC-2026-0001,51,M,150,Sí,Sí,ASY,Flat,97.66,Alto Riesgo,ALTO
+2026-03-06,17:38:24,PAC-206-0002,46,F,150,No,No,ASY,Up,10.58,Bajo Riesgo,BAJO
