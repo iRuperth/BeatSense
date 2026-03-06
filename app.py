@@ -423,7 +423,6 @@ def crear_radar_chart(datos):
 
 modelo, scaler, modelo_cargado = cargar_modelo()
 lottie_heart = load_lottiefile("./assets/Heart with ECG.json")
-lottie_heart_p = load_lottiefile("./assets/Love is blind.json")
 
 # HEADER CON ANIMACIÓN LOTTIE
 
@@ -473,7 +472,7 @@ if not modelo_cargado:
 # SIDEBAR - ENTRADA DE DATOS
 
 with st.sidebar:
-    # st.image("assets/Designer.png", width=150,)
+    
     # Header personalizado del sidebar
     with st.sidebar:
     # Header personalizado del sidebar - blanco con acento rojo
@@ -499,7 +498,7 @@ with st.sidebar:
     st.markdown("---")
     
     st.subheader("Información General")
-    patient_id = st.text_input("ID del Paciente", placeholder="Ej: PAC-2024-001")
+    patient_id = st.text_input("ID del Paciente", placeholder="Ej: PAC-2026-01")
     
     col1, col2 = st.columns(2)
     with col1:
@@ -716,13 +715,7 @@ with tab1:
         </div>
         </div>
         """, unsafe_allow_html=True)
-        
-        # if lottie_heart_p:
-        #     st_lottie(lottie_heart_p, height=500, key="heart_principal", quality="high", speed=1)
-        # else:
-        #     st.markdown("<div style='font-size: 12rem; text-align: center; line-height: 1;'>❤️</div>", unsafe_allow_html=True)
-        
-        
+                
 with tab2:
     if analizar:
         col1, col2 = st.columns(2)
@@ -741,7 +734,7 @@ with tab2:
         
         tipo_dolor_texto = {'ASY': 'Asintomático', 'ATA': 'Angina Atípica', 'NAP': 'Dolor No Anginoso', 'TA': 'Angina Típica'}[chest_pain_type]
         pendiente_texto = {'Flat': 'Plana', 'Up': 'Ascendente', 'Down': 'Descendente'}[st_slope]
-       # Crear tabla HTML personalizada en lugar de st.dataframe
+        # Crear tabla HTML personalizada en lugar de st.dataframe
         tabla_html = f"""
         <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
            <thead>
@@ -869,8 +862,7 @@ with tab3:
         
         # Mostrar tabla
         st.subheader(f"📋 Registros ({len(df_filtrado)} pacientes)")
-        
-       
+         
         # Crear tabla HTML para evitar error de PyArrow
         if len(df_filtrado) > 0:
             tabla_historial = "<div style='overflow-x: auto;'><table style='width: 100%; border-collapse: collapse; background: white; border-radius: 8px;'>"
