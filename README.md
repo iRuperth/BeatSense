@@ -1,15 +1,3 @@
----
-title: BeatSense
-emoji: 🩺
-colorFrom: blue
-colorTo: indigo
-sdk: docker
-app_port: 7860
-pinned: false
-license: mit
-short_description: Cardiovascular risk workstation (FastAPI + Next.js)
----
-
 <p align="center">
   <img src="src/img/logo.png" alt="BeatSense" width="260" />
 </p>
