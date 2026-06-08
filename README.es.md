@@ -2,7 +2,7 @@
   <img src="src/img/logo.png" alt="BeatSense" width="260" />
 </p>
 
-<h1 align="center">BeatSense — Inteligencia de Riesgo Cardiovascular</h1>
+<h1 align="center">BeatSense · Inteligencia de Riesgo Cardiovascular</h1>
 
 <p align="center">
   <a href="https://huggingface.co/spaces/devrup404/BeatSense">
