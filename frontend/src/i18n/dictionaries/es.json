@@ -1,0 +1,186 @@
+{
+  "app": {
+    "name": "BeatSense",
+    "tagline": "Inteligencia de Riesgo Cardiovascular",
+    "institution": "Unidad de Cardiología BeatSense"
+  },
+  "nav": {
+    "dashboard": "Panel",
+    "newEvaluation": "Nueva Evaluación",
+    "patients": "Historial",
+    "eda": "Análisis de Datos",
+    "model": "Modelo",
+    "settings": "Ajustes"
+  },
+  "header": {
+    "search": "Buscar ID de paciente...",
+    "shift": "Turno de día",
+    "role": "Puesto de enfermería",
+    "user": "Enfermero/a"
+  },
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "submit": "Enviar",
+    "loading": "Cargando...",
+    "error": "Ha ocurrido un error",
+    "tryAgain": "Reintentar",
+    "print": "Imprimir",
+    "download": "Descargar",
+    "export": "Exportar CSV",
+    "noData": "Sin datos",
+    "high": "Alto",
+    "low": "Bajo",
+    "yes": "Sí",
+    "no": "No",
+    "male": "Hombre",
+    "female": "Mujer",
+    "today": "Hoy",
+    "predict": "Ejecutar Predicción"
+  },
+  "dashboard": {
+    "title": "Panel Clínico",
+    "subtitle": "Resumen en tiempo real de las evaluaciones de riesgo",
+    "kpi": {
+      "totalAssessments": "Evaluaciones totales",
+      "todayAssessments": "Hoy",
+      "highRiskPct": "Tasa de alto riesgo",
+      "lowRisk": "Riesgo Bajo",
+      "highRisk": "Riesgo Alto"
+    },
+    "recentTitle": "Evaluaciones recientes",
+    "recentEmpty": "Aún no hay evaluaciones. Realiza la primera.",
+    "riskDistribution": "Distribución de riesgo",
+    "quickAction": "Iniciar Nueva Evaluación"
+  },
+  "form": {
+    "title": "Nueva Evaluación Cardiovascular",
+    "subtitle": "Introduzca los datos clínicos del paciente para calcular el riesgo coronario.",
+    "sections": {
+      "demographics": "Identificación del paciente",
+      "vitals": "Constantes y laboratorio",
+      "symptoms": "Síntomas y ECG"
+    },
+    "fields": {
+      "patientId": "ID de paciente",
+      "patientIdPlaceholder": "Opcional — se genera si está vacío",
+      "age": "Edad (años)",
+      "sex": "Sexo",
+      "restingBp": "Presión arterial en reposo (mm Hg)",
+      "cholesterol": "Colesterol (mg/dL)",
+      "maxHr": "Frecuencia cardíaca máxima (lpm)",
+      "fastingBs": "Glucosa en ayunas > 120 mg/dL",
+      "exerciseAngina": "Angina inducida por ejercicio",
+      "chestPainType": "Tipo de dolor torácico",
+      "restingEcg": "ECG en reposo",
+      "stSlope": "Pendiente ST",
+      "oldpeak": "Oldpeak (depresión ST)"
+    },
+    "options": {
+      "chestPain": {
+        "ASY": "Asintomático (ASY)",
+        "ATA": "Angina atípica (ATA)",
+        "NAP": "Dolor no anginoso (NAP)",
+        "TA": "Angina típica (TA)"
+      },
+      "stSlope": {
+        "Up": "Ascendente",
+        "Flat": "Plana",
+        "Down": "Descendente"
+      },
+      "restingEcg": {
+        "Normal": "Normal",
+        "ST": "Anomalía ST-T",
+        "LVH": "Hipertrofia ventricular izquierda"
+      }
+    },
+    "actions": {
+      "reset": "Limpiar",
+      "submit": "Ejecutar Predicción"
+    },
+    "validation": {
+      "required": "Requerido",
+      "invalidNumber": "Número inválido",
+      "ageRange": "La edad debe estar entre 1 y 120",
+      "hrRange": "La frecuencia debe estar entre 40 y 240"
+    }
+  },
+  "ticket": {
+    "title": "Informe de Riesgo Cardiovascular",
+    "facility": "Unidad de Cardiología BeatSense",
+    "code": "Referencia",
+    "patient": "Paciente",
+    "date": "Fecha",
+    "time": "Hora",
+    "clinician": "Clínico",
+    "vitals": "Resumen Clínico",
+    "result": "Resultado",
+    "riskScore": "Puntuación de riesgo",
+    "threshold": "Umbral de decisión",
+    "classification": "Clasificación",
+    "highRisk": "RIESGO ALTO",
+    "lowRisk": "RIESGO BAJO",
+    "recommendation": "Recomendación",
+    "recHigh": "Derivar a cardiología. Solicitar ECG + prueba de esfuerzo.",
+    "recLow": "Continuar seguimiento rutinario. Reevaluar en 12 meses.",
+    "footer": "Generado por BeatSense — No sustituye el criterio clínico.",
+    "newAssessment": "Nueva Evaluación"
+  },
+  "history": {
+    "title": "Historial de Pacientes",
+    "subtitle": "Todas las evaluaciones de riesgo registradas.",
+    "columns": {
+      "date": "Fecha",
+      "time": "Hora",
+      "patientId": "ID Paciente",
+      "age": "Edad",
+      "sex": "Sexo",
+      "maxHr": "FC Máx",
+      "fastingBs": "Glucosa",
+      "exerciseAngina": "Angina",
+      "chestPain": "Dolor",
+      "stSlope": "ST",
+      "probability": "Probabilidad",
+      "risk": "Riesgo"
+    },
+    "search": "Buscar...",
+    "filterAll": "Todos",
+    "filterHigh": "Riesgo alto",
+    "filterLow": "Riesgo bajo"
+  },
+  "eda": {
+    "title": "Análisis Exploratorio de Datos",
+    "subtitle": "Distribuciones y correlaciones clínicas de 918 registros.",
+    "ageDist": "Distribución de edad",
+    "sexDist": "Distribución por sexo",
+    "chestPainDist": "Tipo de dolor torácico",
+    "riskBySex": "Tasa de riesgo por sexo",
+    "maxHrVsAge": "FC Máx vs Edad"
+  },
+  "model": {
+    "title": "Información del Modelo",
+    "subtitle": "Rendimiento del modelo en producción y alternativas evaluadas.",
+    "selected": "Modelo seleccionado",
+    "metrics": {
+      "accuracy": "Exactitud",
+      "recall": "Recall (clase 1)",
+      "rocAuc": "ROC-AUC",
+      "cv": "Validación cruzada"
+    },
+    "comparison": "Comparación de modelos",
+    "rationale": "Justificación de la selección",
+    "rationaleText": "Se eligió la Regresión Logística con umbral de decisión 0.4 porque, en cardiología, un falso negativo (no detectar a un paciente enfermo) es mucho más costoso que un falso positivo. El recall de 0.94 maximiza la detección manteniendo un 88% de exactitud y total interpretabilidad."
+  },
+  "settings": {
+    "title": "Ajustes",
+    "language": "Idioma",
+    "theme": "Tema",
+    "themeLight": "Claro",
+    "themeDark": "Oscuro",
+    "themeSystem": "Sistema"
+  },
+  "result": {
+    "predicting": "Calculando riesgo...",
+    "error": "No se pudo calcular la predicción. ¿Está la API en marcha?"
+  }
+}
