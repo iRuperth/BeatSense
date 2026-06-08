@@ -1,0 +1,46 @@
+**/.git
+**/.gitignore
+**/.gitattributes
+**/.DS_Store
+
+# Python
+.venv
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node
+frontend/node_modules
+frontend/.next
+frontend/out
+frontend/.turbo
+
+# Notebooks / reports / huge artefacts not needed at runtime
+notebook/
+report/
+assets/
+
+# Local dev junk
+*.log
+.env
+.env.*
+!.env.example
+.streamlit/
+.python-version
+
+# Docs
+docs/article-medium.md
+docs/inform.pdf
+docs/historial_pacientes.csv
+
+# Legacy
+Dockerfile.streamlit
+docker-compose.yml
+app.py
+.github/
+
+# Macros
+.idea/
+.vscode/
